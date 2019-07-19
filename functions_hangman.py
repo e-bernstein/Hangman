@@ -6,11 +6,18 @@ from text_elements import *
 
 
 def read_text():
-    
-    file = open( file = t_text_file, mode = t_read_flag, encoding = t_file_encoding)
-    all_words = file.read()
-    file.close()
-    ki_words = all_words.split(t_text_splitter)
+
+    try:
+        file = open( file = t_text_file, mode = t_read_flag, encoding = t_file_encoding)
+        all_words = file.read()
+        file.close()
+        ki_words = all_words.split(t_text_splitter)
+        
+    except FileNotFoundError:
+        file = open(t_text_file, t_write_flag)
+        file.write(t_first_ki_word)
+        file.close()
+        ki_words = []
     
     return ki_words
 
